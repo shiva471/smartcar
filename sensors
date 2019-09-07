@@ -1,0 +1,58 @@
+#define mic 2 // MIC SENSOR DIGITAL PIN
+#define mica A0// MIC SENSOR ANALOG PIN
+#define apin A1// ALCOHOL SENSOR ANALOG PIN
+#define rly 8// RELAY 
+int mval,aval;// MVAL  = MIC SENSOR VALUE , AVAL = ALCOHOL SENSOR VALUE
+#define rled 3 // RLED = RED LED
+#define gled 4 // GLED = GREEN LED
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(mic,INPUT);
+  pinMode(mica,INPUT);
+  pinMode(apin,OUTPUT);
+  digitalWrite(8,LOW);
+  pinMode(rled,OUTPUT);
+  pinMode(gled,OUTPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+//analog value of mic
+Serial.print("ANALOG VALUE OF MIC: ");
+Serial.println(analogRead(mica));
+mval=digitalRead(mic);
+aval=analogRead(apin);
+//mic value
+Serial.print("DIGITAL VALUE OF MIC: ");
+Serial.println(mval);
+// alcohol value 
+Serial.print("ANALOG VALUE OF ALCOHOL: ");
+Serial.println(aval);
+if(mval == 1)
+{
+ digitalWrite(rled,HIGH); // r led on
+while(1)
+{
+  if(aval <= 270)
+  {
+    digitalWrite(gled,HIGH);// g led on
+   while(1)
+   {
+   digitalWrite(8,HIGH); 
+   }
+  }
+  else
+  {
+    digitalWrite(gled,LOW);// g led off
+  }
+}
+}
+else
+{
+  digitalWrite(rled,LOW);// r led off
+}
+delay(1000);
+Serial.println("-----------------------------------------------------------------");
+}
