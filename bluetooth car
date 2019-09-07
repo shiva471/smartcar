@@ -57,7 +57,7 @@ void loop() {
   digitalWrite(m3, HIGH);
   digitalWrite(m4, LOW); 
   }
-   else if(data == '2')
+   else if(data == '3')
   {
    digitalWrite(m1, LOW);
   digitalWrite(m2, HIGH);
